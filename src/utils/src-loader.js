@@ -1,4 +1,3 @@
-/* global Image */
 var debug = require('./debug');
 
 var warn = debug('utils:src-loader:warn');
@@ -89,12 +88,8 @@ function parseUrl (src) {
  * @param  {function} onResult - callback with the test result
  */
 function validateImageUrl (src, onResult) {
-  var tester = new Image();
-  tester.addEventListener('load', onLoad);
-  function onLoad () { onResult(true); }
-  tester.addEventListener('error', onError);
-  function onError () { onResult(false); }
-  tester.src = src;
+  var isImg = src.match(/.(jpeg|jpg|gif|png)$/);
+  onResult(isImg);
 }
 
 /**
